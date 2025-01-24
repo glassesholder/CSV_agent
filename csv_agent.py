@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import streamlit as st
 import pandas as pd
 from utils import create_agent, validate_api_key, tool_callback, observation_callback, result_callback, print_messages, ask
+import os
  
 # API 키 및 프로젝트 설정
 load_dotenv()
@@ -70,6 +71,7 @@ with st.sidebar:
         if validate_api_key(api_key):
             st.success("API 키가 유효합니다! ✅")
             st.session_state['api_key_valid'] = True
+            os.environ['OPENAI_API_KEY']=api_key
         else:
             st.error("유효하지 않은 API 키입니다. 다시 확인해주세요.")
             st.session_state['api_key_valid'] = False
